@@ -18,8 +18,12 @@ win.addch(food[0], food[1], 'O')
 
 key = KEY_RIGHT
 
+score = 0
+
 while key != 27: #27 is ASCII for ESC
     win.border(0)
+    win.addstr(0,2,'Score: ' + str(score) + ' ' )
+    win.addstr(0,27,' SNAKE ')
     win.timeout(100) #speed for snake
     default_key = key
     event = win.getch()
@@ -32,6 +36,7 @@ while key != 27: #27 is ASCII for ESC
 
     if snake[0] == food:
         food = []
+        score += 1
         while food == []:
             food = [randint(1,10), randint(1,58)]
             if food in snake:
@@ -44,6 +49,15 @@ while key != 27: #27 is ASCII for ESC
 
     if snake[0] in snake[1:]:
         break
+
+    if snake[0][0] == 0:
+        snake[0][0] = 18
+    if snake[0][0] == 19:
+        snake[0][0] = 1
+    if snake[0][1] == 0:
+        snake[0][1] = 58
+    if snake[0][1] == 59:
+        snake[0][1] = 1
     
 # time.sleep(10)
 c.endwin()
